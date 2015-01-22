@@ -16,16 +16,15 @@ private String description;
         this.name = name;
         this.description = description;
     }
-  
-
+ //returns name of person
     public String getName() {
         return name;
     }
-
+//used to set name
     public void setName(String name) {
         this.name = name;
     }
-
+//returns description of job
     public String getDescription() {
         return description;
     }
@@ -40,7 +39,7 @@ private String description;
         else 
             return true;
     }
-    
+    // displays info
     @Override
     public String toString() {
         return "Task{" + "name=" + name + ", description=" + description + '}';

@@ -237,17 +237,14 @@ public class TaskProgram extends javax.swing.JFrame {
           if(tottask == 0)
         {
            //popup
-            JOptionPane.showMessageDialog(this,"No task to replace this with, use Insert instead");
+            JOptionPane.showMessageDialog(this,"cannot replace");
             return;
         }
+         //read info
         String nm = txtname.getText();
         String d = txtdesc.getText();
         t = new Task(nm, d);
-        if(t.validate()==false){
-            //error warning
-            JOptionPane.showMessageDialog(this, "Error - Must enter all information");
-            return;
-        }
+       
         li.next();
         li.set(t);
         li.previous();
@@ -268,7 +265,7 @@ public class TaskProgram extends javax.swing.JFrame {
             txtname.setText("");
             txtdesc.setText("");
             curtask = 0;
-            lblctask.setText("n/a");
+            lblctask.setText("");
             return;
         }
         if(tottask>1)
@@ -304,7 +301,10 @@ public class TaskProgram extends javax.swing.JFrame {
                 
         li.add(t);
         li.previous();
-        if(curtask==0)curtask++;
+        if(curtask==0)
+        {
+            curtask++;
+        }
         tottask++;
         lblttask.setText(" " + tottask);
         lblctask.setText(" " + curtask);
@@ -320,12 +320,17 @@ public class TaskProgram extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Error you must enter all information");
             return;
         }
-        if(tottask>0)li.next();
+        //adds task before curtask(couldn't quite get to work)
+        if(tottask>0)
+        {
+            li.next();
+        }
         li.add(t);
         li.previous();
         curtask++;
         tottask++;
-        lblttask.setText(""+tottask);//update counter displays
+        //display what number the task is
+        lblttask.setText(""+tottask);
         lblctask.setText(""+curtask);
         JOptionPane.showMessageDialog(this,"Task has been added");
     }//GEN-LAST:event_mnuafterActionPerformed
@@ -356,7 +361,7 @@ public class TaskProgram extends javax.swing.JFrame {
         for(int x=0;x<list.size();x++)
         {
             t=(Task)list.get(x);
-            result+="TASK " + (x+1) + ":\n" + t.toString()+ "\n";
+            result+="task:--> " + (x+1) + ":\n" + t.toString()+ "\n";
         }
         JOptionPane.showMessageDialog(this,result);
   }
@@ -368,8 +373,8 @@ public class TaskProgram extends javax.swing.JFrame {
            li.next();
        t=(Task)li.previous();
        curtask=tottask;
-       //updates display
-       lblctask.setText(""+curtask);
+       //updates display and the scheduled task
+       lblctask.setText(" "+ curtask);
        txtname.setText(t.getName());
        txtdesc.setText(t.getDescription());
         
@@ -394,7 +399,7 @@ public class TaskProgram extends javax.swing.JFrame {
      //moves one space back in the schedule
       if(curtask==1)return; 
        curtask--;
-       lblctask.setText(""+curtask);
+       lblctask.setText(" "+ curtask);
        t=(Task)
        li.previous();
        txtname.setText(t.getName());
